@@ -25,6 +25,7 @@ public class SpecAdapter extends RecyclerView.Adapter<SpecViewHolder> {
     @Override
     public void onBindViewHolder(SpecViewHolder holder, int position) {
         holder.nameText.setText(mSpecData.get(position).getName());
+        holder.dateText.setText(mSpecData.get(position).getDate());
     }
 
     @Override

@@ -13,6 +13,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
+
 public class HomeFragment extends Fragment {
 
     private static HomeFragment HF;
@@ -42,6 +44,9 @@ public class HomeFragment extends Fragment {
         mSpecData.add(new SpecItem("HyconHacks", "2018.09.14", hexStringToByteArray("A459CF39CD65D4B56CFC8E35B361D4B160A7A8490B39D525AE655ADF538C7C7B")));
         mSpecAdapter = new SpecAdapter(mSpecData);
         mSpecRecycler.setAdapter(mSpecAdapter);
+
+        OverScrollDecoratorHelper.setUpOverScroll(mSpecRecycler, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
+
 
         return v;
     }

@@ -11,11 +11,13 @@ public class SpecViewHolder extends RecyclerView.ViewHolder {
 
     protected CardView backgroundCard;
     protected TextView nameText;
+    protected TextView dateText;
 
     public SpecViewHolder(Context context, ViewGroup parent) {
         super(LayoutInflater.from(context).inflate(R.layout.item_spec, parent, false));
 
         backgroundCard = (CardView) itemView.findViewById(R.id.card_background);
-        nameText = (TextView) itemView.findViewById(R.id.text_name);
+        nameText = (TextView) itemView.findViewById(R.id.text_spec_name);
+        dateText = (TextView) itemView.findViewById(R.id.text_spec_date);
     }
 }

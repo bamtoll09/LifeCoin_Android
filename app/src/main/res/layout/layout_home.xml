@@ -16,6 +16,38 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="25dp"/>
 
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User"
+            android:textColor="#fccc"
+            android:textSize="25dp"
+            android:textAlignment="center"
+            android:layout_toRightOf="@id/image_profile"
+            android:layout_alignTop="@id/image_profile"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="25dp"
+            />
+
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I am User ^^7"
+            android:textColor="#fccc"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:layout_toRightOf="@id/image_profile"
+            android:layout_below="@id/text_name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            />
+
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

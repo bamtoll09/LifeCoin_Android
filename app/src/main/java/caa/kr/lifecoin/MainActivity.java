@@ -8,12 +8,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
     private int mPosition = 0;
-    private LinearLayout mFragmentLayout;
     private FragmentTransaction mFragmentTransaction;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -25,16 +23,19 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     if (mPosition == 0) return false;
                     replaceFragment(HomeFragment.getInstance());
+                    mPosition = 0;
                     return true;
 
                 case R.id.navigation_camera:
                     if (mPosition == 1) return false;
-                    // replaceFragment(CameraFragment.getInstance());
+                    replaceFragment(CameraFragment.getInstance());
+                    mPosition = 1;
                     return true;
 
                 case R.id.navigation_settings:
                     if (mPosition == 2) return false;
                     // replaceFragment(SettingFragment.getInstance());
+                    // mPosition = 2;
                     return true;
             }
             return false;
