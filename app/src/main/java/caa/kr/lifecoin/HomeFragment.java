@@ -1,8 +1,8 @@
 package caa.kr.lifecoin;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
@@ -39,7 +40,7 @@ public class HomeFragment extends Fragment {
         mProfileImage = (ImageView) v.findViewById(R.id.image_profile);
         mSpecRecycler = (RecyclerView) v.findViewById(R.id.recyler_specs);
 
-        Picasso.get().load("http://bamtoll.me:3000/shops/5b8c7a998b2b0012ddb46e37/images/1.jpeg").fit().centerCrop().transform(new CircleTransform()).placeholder(R.drawable.ic_launcher_foreground).into(mProfileImage);
+        Picasso.get().load(new File(MainActivity.SP.getPreferences("profile_image_path"))).fit().centerCrop().transform(new CircleTransform()).placeholder(R.drawable.ic_launcher_foreground).into(mProfileImage);
 
         mSpecData.add(new SpecItem("HyconHacks", "2018.09.14", hexStringToByteArray("A459CF39CD65D4B56CFC8E35B361D4B160A7A8490B39D525AE655ADF538C7C7B")));
         mSpecAdapter = new SpecAdapter(mSpecData);
@@ -49,6 +50,13 @@ public class HomeFragment extends Fragment {
 
 
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ((MainActivity) getActivity()).LoadingScreenSwitch(0);
     }
 
     public static byte[] hexStringToByteArray(String s) {

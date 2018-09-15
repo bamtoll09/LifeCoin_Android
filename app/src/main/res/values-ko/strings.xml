@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">LifeCoin</string>
+    <string name="activity_splash">Splash</string>
     <string name="title_home">홈</string>
     <string name="title_camera">카메라</string>
     <string name="title_settings">설정</string>
+
+    <string name="settings_user_info">사용자 정보</string>
+    <string name="settings_profile">프로필 변경</string>
+    <string name="settings_app_info">앱 정보</string>
+    <string name="settings_version">버전</string>
 </resources>
