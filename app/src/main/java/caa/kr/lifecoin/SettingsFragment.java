@@ -40,7 +40,7 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        addPreferencesFromResource(R.xml.pref_data_sync);
+        addPreferencesFromResource(R.xml.pref_settings);
 
         mImageSelectPreference = findPreference("profile_image");
         mImageSelectPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {

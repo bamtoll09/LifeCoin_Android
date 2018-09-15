@@ -67,4 +67,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/settings_app_info"
+        android:key="app_info">
+
+        <Preference
+            android:title="@string/settings_version"
+            android:key="version"
+            android:summary="v1.0.0"
+            />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
