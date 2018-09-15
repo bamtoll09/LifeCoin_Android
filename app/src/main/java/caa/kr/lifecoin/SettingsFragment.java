@@ -67,7 +67,6 @@ public class SettingsFragment extends PreferenceFragment {
                 if (nameString.equals("")) {
                     MainActivity.SP.savePreferences("name", "none");
                     mEditNamePreference.setSummary(getResources().getString(R.string.home_user));
-                    HomeFragment.getInstance().setName(null);
                 }
                 else {
                     ((EditTextPreference) mEditNamePreference).setSummary(nameString);
