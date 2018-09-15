@@ -67,7 +67,7 @@ public class CameraFragment extends Fragment {
             }
         });
 
-        mWebView.loadUrl("https://bc687d1f.ngrok.io");
+        mWebView.loadUrl("https://bd9c1768.ngrok.io");
 
 
         return v;

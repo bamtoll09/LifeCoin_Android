@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.provider.MediaStore;
@@ -37,12 +38,15 @@ public class SettingsFragment extends PreferenceFragment {
     private final String SAVE_FOLDER = "/LifeCoin/Profile";
     private final int GALLERY_CODE=1122;
     private Preference mImageSelectPreference;
+    private Preference mEditNamePreference;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         addPreferencesFromResource(R.xml.pref_settings);
 
         mImageSelectPreference = findPreference("profile_image");
+        mEditNamePreference = findPreference("name");
+
         mImageSelectPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -50,6 +54,26 @@ public class SettingsFragment extends PreferenceFragment {
                 intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 startActivityForResult(intent, GALLERY_CODE);
+                return true;
+            }
+        });
+
+        if (MainActivity.SP.getPreferences("name").equals("none"))
+            mEditNamePreference.setSummary(getResources().getString(R.string.home_user));
+        ((EditTextPreference) mEditNamePreference).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                String nameString = ((EditTextPreference) mEditNamePreference).getText().toString().trim();
+                if (nameString.equals("")) {
+                    MainActivity.SP.savePreferences("name", "none");
+                    mEditNamePreference.setSummary(getResources().getString(R.string.home_user));
+                    HomeFragment.getInstance().setName(null);
+                }
+                else {
+                    ((EditTextPreference) mEditNamePreference).setSummary(nameString);
+                    MainActivity.SP.savePreferences("name", nameString);
+                    HomeFragment.getInstance().setName(nameString);
+                }
                 return true;
             }
         });

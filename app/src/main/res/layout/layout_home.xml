@@ -20,7 +20,7 @@
             android:id="@+id/text_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="User"
+            android:text="@string/home_user"
             android:textColor="#eaeaea"
             android:textSize="25dp"
             android:textAlignment="center"
@@ -33,7 +33,7 @@
             />
 
         <TextView
-            android:id="@+id/text_description"
+            android:id="@+id/text_my_specs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="My Specs: 17"

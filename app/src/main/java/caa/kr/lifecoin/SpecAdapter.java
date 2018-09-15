@@ -5,13 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class SpecAdapter extends RecyclerView.Adapter<SpecViewHolder> {
 
-    private List<SpecItem> mSpecData;
+    private String[] mSpecData;
 
-    public SpecAdapter(List<SpecItem> specData) {
+    public SpecAdapter(String[] specData) {
         mSpecData = specData;
     }
 
@@ -24,12 +27,20 @@ public class SpecAdapter extends RecyclerView.Adapter<SpecViewHolder> {
 
     @Override
     public void onBindViewHolder(SpecViewHolder holder, int position) {
-        holder.nameText.setText(mSpecData.get(position).getName());
-        holder.dateText.setText(mSpecData.get(position).getDate());
+        Date day = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(day);
+        if (position > 4) c.add(Calendar.DATE, -position / 5);
+        day = c.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);
+        String date = String.valueOf(sdf.format(day));
+
+        holder.nameText.setText(mSpecData[position]);
+        holder.dateText.setText(date);
     }
 
     @Override
     public int getItemCount() {
-        return mSpecData.size();
+        return mSpecData.length;
     }
 }

@@ -10,7 +10,12 @@
             android:key="profile_image"
             />
 
-        <CheckBoxPreference
+        <EditTextPreference
+            android:title="@string/settings_name"
+            android:key="name"
+            />
+
+        <!--<CheckBoxPreference
             android:key="perform_sync"
             android:summary="Enable or disable data sync"
             android:title="Enable Auto Sync"
@@ -62,7 +67,7 @@
             android:summary="Customise Notification Ringtone for you"
             android:dialogTitle="Notification Ringtone"
             android:dialogMessage="Customise Notification Ringtone for you"/>
-
+-->
 
 
     </PreferenceCategory>
@@ -70,6 +75,12 @@
     <PreferenceCategory
         android:title="@string/settings_app_info"
         android:key="app_info">
+
+        <Preference
+            android:title="@string/settings_auth_key"
+            android:key="auth_key"
+            android:summary="E299********************************************CFB5"
+            />
 
         <Preference
             android:title="@string/settings_version"

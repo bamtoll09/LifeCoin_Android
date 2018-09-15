@@ -1,8 +1,10 @@
 package caa.kr.lifecoin;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +12,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +30,10 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    if (mPosition == 0) return false;
+                    if (mPosition == 0) {
+                        HomeFragment.getInstance().loadBlocks();
+                        return false;
+                    }
                     LoadingScreenSwitch(1);
                     replaceFragment(HomeFragment.getInstance());
                     mFragmentContainer.setBackgroundColor(getColor(R.color.colorBackground));
@@ -71,6 +77,30 @@ public class MainActivity extends AppCompatActivity {
 
         mFragmentTransaction = getFragmentManager().beginTransaction();
         mFragmentTransaction.add(R.id.fragment_container, HomeFragment.getInstance()).commit();
+
+        if (SP.getPreferences("name").equals("none")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+            final EditText et = new EditText(MainActivity.this);
+            builder.setView(et)
+                    .setTitle(R.string.input_name)
+                    .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (!et.getText().toString().trim().equals(""))
+                                SP.savePreferences("name", et.getText().toString().trim());
+
+                            dialog.dismiss();
+                        }
+                    })
+                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            HomeFragment.getInstance().setName(getResources().getString(R.string.settings_name));
+                        }
+                    })
+                    .show();
+        }
     }
 
     private void replaceFragment(Fragment fragment) {
