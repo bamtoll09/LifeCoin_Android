@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         mFragmentContainer = (LinearLayout) findViewById(R.id.fragment_container);
         mLoadingLayout = (LinearLayout) findViewById(R.id.layout_qr_reader_loading);
-        SP = new SharedPreference(this, "lifecoin");
+        SP = new SharedPreference(this);
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -82,13 +82,15 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
             final EditText et = new EditText(MainActivity.this);
+            et.setSingleLine(true);
             builder.setView(et)
                     .setTitle(R.string.input_name)
                     .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if (!et.getText().toString().trim().equals(""))
+                            if (!et.getText().toString().trim().equals("")) {
                                 SP.savePreferences("name", et.getText().toString().trim());
+                            }
 
                             dialog.dismiss();
                         }
@@ -96,7 +98,10 @@ public class MainActivity extends AppCompatActivity {
                     .setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
-                            HomeFragment.getInstance().setName(getResources().getString(R.string.settings_name));
+                            if (SP.getPreferences("name").equals("none"))
+                                HomeFragment.getInstance().setName(getResources().getString(R.string.settings_name));
+                            else
+                                HomeFragment.getInstance().setName(SP.getPreferences("name"));
                         }
                     })
                     .show();

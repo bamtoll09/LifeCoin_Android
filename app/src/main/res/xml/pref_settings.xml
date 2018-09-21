@@ -13,6 +13,7 @@
         <EditTextPreference
             android:title="@string/settings_name"
             android:key="name"
+            android:singleLine="true"
             />
 
         <!--<CheckBoxPreference

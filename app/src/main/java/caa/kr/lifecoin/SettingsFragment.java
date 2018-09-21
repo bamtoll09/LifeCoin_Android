@@ -57,19 +57,22 @@ public class SettingsFragment extends PreferenceFragment {
                 return true;
             }
         });
-
+        
         if (MainActivity.SP.getPreferences("name").equals("none"))
             mEditNamePreference.setSummary(getResources().getString(R.string.home_user));
-        ((EditTextPreference) mEditNamePreference).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        else
+            mEditNamePreference.setSummary(MainActivity.SP.getPreferences("name"));
+
+        mEditNamePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                String nameString = ((EditTextPreference) mEditNamePreference).getText().toString().trim();
+                String nameString = newValue.toString().trim();
                 if (nameString.equals("")) {
                     MainActivity.SP.savePreferences("name", "none");
-                    mEditNamePreference.setSummary(getResources().getString(R.string.home_user));
+                    preference.setSummary(getResources().getString(R.string.home_user));
                 }
                 else {
-                    ((EditTextPreference) mEditNamePreference).setSummary(nameString);
+                    preference.setSummary(nameString);
                     MainActivity.SP.savePreferences("name", nameString);
                     HomeFragment.getInstance().setName(nameString);
                 }
